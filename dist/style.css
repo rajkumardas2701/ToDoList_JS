@@ -5,7 +5,7 @@ body {
 
 .navbar {
   background-color: rgb(68, 59, 59);
-  height: 50px;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -17,17 +17,67 @@ body {
 }
 
 .project-section {
-  margin-left: 15px;
+  width: 300px;
+  border-right: 2px solid darkslategrey;
+  height: 92.5vh;
 }
 
-.project-section h2 {
+.project-header {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  margin-bottom: 15px;
+  margin: 0 15px 15px 15px;
+
+}
+
+.project-header h2 {
   font-family: monospace;
   font-size: 25px;
+  align-self: center;
+  margin-top: 15px;
+}
+
+.project-header button {
+  height: 30px;
+  background-color: rgb(128, 128, 240);
+  color: white;
+  font-weight: bolder;
 }
 
 .project {
   list-style: decimal;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Courier New', Courier, monospace;
   font-size: larger;
   cursor: pointer;
+  margin: 15px;
+  font-weight: bolder;
+}
+
+.new-project-form {
+  position: absolute;
+  top: 75px;
+  left: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-label {
+  margin: 40px;
+}
+
+.form-input {
+  width: 250px;
+  height: 40px;
+}
+
+.project-attr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#project-submit {
+  width: 100px;
 }

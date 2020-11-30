@@ -28,6 +28,4 @@ const projectList = () => {
   };
 };
 
-// projectList();
-
 export default projectList;
