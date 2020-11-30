@@ -1,9 +1,9 @@
-import todoList from './todo';
+// import todoList from './todo';
 
 const projectList = () => {
   const defaultProject = {
-    name: 'Default project',
-    value: '1',
+    name: 'Default',
+    value: '0',
     todo: [],
   };
 
@@ -21,6 +21,13 @@ const projectList = () => {
   const deleteProject = (project) => {
     projects.splice(projects[project.value], 1);
   };
+  return {
+    projects,
+    addProject,
+    deleteProject,
+  };
 };
+
+// projectList();
 
 export default projectList;

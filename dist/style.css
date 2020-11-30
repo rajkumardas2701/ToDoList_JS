@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0;
+}
+
+.navbar {
+  background-color: rgb(68, 59, 59);
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar h1 {
+  color: antiquewhite;
+  margin: 0 auto;
+}
+
+.project-section {
+  margin-left: 15px;
+}
+
+.project-section h2 {
+  font-family: monospace;
+  font-size: 25px;
+}
+
+.project {
+  list-style: decimal;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: larger;
+  cursor: pointer;
+}
