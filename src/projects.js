@@ -1,9 +1,12 @@
-const projects = () => {
+import todoList from './todo';
+
+const projectList = () => {
   const defaultProject = {
     name: 'Default project',
     value: '1',
     todo: [],
   };
+
   const projects = [defaultProject];
 
   const addProject = (project) => {
@@ -20,4 +23,4 @@ const projects = () => {
   };
 };
 
-export default projects;
+export default projectList;
