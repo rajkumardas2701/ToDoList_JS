@@ -35,23 +35,40 @@ const UIController = () => {
     projectSecHeaderBtn.innerHTML = 'Add Project';
 
     const projectSecBody = document.createElement('div');
+    projectSecBody.setAttribute('id', 'project-list');
     projectSection.appendChild(projectSecBody);
 
+    const displayProjects = (projects) => {
+      for (let i = 0; i < projects.length; i += 1) {
+        const project = document.createElement('li');
+        project.setAttribute('class', 'project');
+        project.innerHTML = `${projects[i].name}`;
+        projectSecBody.appendChild(project);
+      }
+    };
+    return {
+      displayProjects,
+    };
+  };
 
-    for (let i = 0; i < projectList().projects.length; i += 1) {
+  const displayProjects = (projects) => {
+    console.log(projects);
+    const projectLi = document.getElementById('project-list');
+    if (projectLi) {
       const project = document.createElement('li');
       project.setAttribute('class', 'project');
-      project.innerHTML = `${projectList().projects[i].name}`;
-      projectSecBody.appendChild(project);
+      project.innerHTML = `${projects}`;
+      projectLi.appendChild(project);
+    } else {
+      proj().displayProjects(projects);
     }
   };
 
   const projectForm = () => {
     const content = document.getElementById('content');
-    // content.setAttribute('class', 'form-content');
 
     const newProject = document.createElement('form');
-    newProject.setAttribute('class', 'new-project-form');
+    newProject.setAttribute('id', 'new-project-form');
     content.appendChild(newProject);
 
     const projectattr = document.createElement('div');
@@ -64,23 +81,42 @@ const UIController = () => {
     projectattr.appendChild(projName);
 
     const projNameText = document.createElement('input');
-    projNameText.setAttribute('class', 'form-input');
+    projNameText.setAttribute('id', 'form-input');
     projectattr.appendChild(projNameText);
 
     const projSubmit = document.createElement('button');
     projSubmit.setAttribute('id', 'project-submit');
     projSubmit.innerHTML = 'Submit';
     newProject.appendChild(projSubmit);
+
+    const addNewProject = (event) => {
+      event.preventDefault();
+      console.log(document.getElementById('form-input').value);
+      projectList().addProject(document.getElementById('form-input').value);
+      displayProjects(document.getElementById('form-input').value);
+
+      const formInput = document.getElementById('new-project-form');
+      formInput.style.display = 'none';
+    };
+
+    if (document.getElementById('project-submit')) {
+      document.getElementById('project-submit').addEventListener('click', addNewProject);
+    }
+
+    return {
+      addNewProject,
+    };
   };
 
-  const addNewProject = () => {
+  const addNewProjectForm = () => {
     document.getElementById('add-project-btn').addEventListener('click', projectForm);
   };
 
   return {
     proj,
     navbar,
-    addNewProject,
+    addNewProjectForm,
+    displayProjects,
   };
 };
 

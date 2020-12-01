@@ -1,9 +1,12 @@
 import UIController from './UIController';
+import projectList from './projects';
 
 const controller = () => {
   UIController().navbar();
-  UIController().proj();
-  UIController().addNewProject();
+  // UIController().proj();
+  UIController().displayProjects(projectList().projects);
+  // UIController().displayProjects();
+  UIController().addNewProjectForm();
 };
-// console.log(projectList().projects[0].name);
+
 controller();
