@@ -81,3 +81,7 @@ body {
 #project-submit {
   width: 100px;
 }
+
+.hide-new-project-form {
+  display: none;
+}

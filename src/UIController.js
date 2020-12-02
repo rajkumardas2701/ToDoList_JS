@@ -1,4 +1,4 @@
-import projectList from './projects';
+import { projectList } from './projects';
 
 const UIController = () => {
   const navbar = () => {
@@ -52,7 +52,7 @@ const UIController = () => {
   };
 
   const displayProjects = (projects) => {
-    console.log(projects);
+    // console.log(projects);
     const projectLi = document.getElementById('project-list');
     if (projectLi) {
       const project = document.createElement('li');
@@ -65,47 +65,44 @@ const UIController = () => {
   };
 
   const projectForm = () => {
-    const content = document.getElementById('content');
+    const formExist = document.getElementById('new-project-form');
+    if (formExist) {
+      document.querySelector('#new-project-form').classList.remove('hide-new-project-form');
+    } else {
+      const content = document.getElementById('content');
 
-    const newProject = document.createElement('form');
-    newProject.setAttribute('id', 'new-project-form');
-    content.appendChild(newProject);
+      const newProject = document.createElement('form');
+      newProject.setAttribute('id', 'new-project-form');
+      content.appendChild(newProject);
 
-    const projectattr = document.createElement('div');
-    projectattr.setAttribute('class', 'project-attr');
-    newProject.appendChild(projectattr);
+      const projectattr = document.createElement('div');
+      projectattr.setAttribute('class', 'project-attr');
+      newProject.appendChild(projectattr);
 
-    const projName = document.createElement('label');
-    projName.setAttribute('class', 'form-label');
-    projName.innerHTML = 'Project Name: ';
-    projectattr.appendChild(projName);
+      const projName = document.createElement('label');
+      projName.setAttribute('class', 'form-label');
+      projName.innerHTML = 'Project Name: ';
+      projectattr.appendChild(projName);
 
-    const projNameText = document.createElement('input');
-    projNameText.setAttribute('id', 'form-input');
-    projectattr.appendChild(projNameText);
+      const projNameText = document.createElement('input');
+      projNameText.setAttribute('id', 'form-input');
+      projectattr.appendChild(projNameText);
 
-    const projSubmit = document.createElement('button');
-    projSubmit.setAttribute('id', 'project-submit');
-    projSubmit.innerHTML = 'Submit';
-    newProject.appendChild(projSubmit);
-
-    const addNewProject = (event) => {
-      event.preventDefault();
-      console.log(document.getElementById('form-input').value);
-      projectList().addProject(document.getElementById('form-input').value);
-      displayProjects(document.getElementById('form-input').value);
-
-      const formInput = document.getElementById('new-project-form');
-      formInput.style.display = 'none';
-    };
-
-    if (document.getElementById('project-submit')) {
-      document.getElementById('project-submit').addEventListener('click', addNewProject);
+      const projSubmit = document.createElement('button');
+      projSubmit.setAttribute('id', 'project-submit');
+      projSubmit.innerHTML = 'Submit';
+      newProject.appendChild(projSubmit);
     }
 
-    return {
-      addNewProject,
-    };
+    if (document.getElementById('project-submit')) {
+      document.getElementById('project-submit').addEventListener('click', (event) => {
+        event.preventDefault();
+        projectList().addProject(document.getElementById('form-input').value);
+        displayProjects(document.getElementById('form-input').value);
+        const temp = document.getElementById('new-project-form');
+        temp.remove();
+      });
+    }
   };
 
   const addNewProjectForm = () => {

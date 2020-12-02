@@ -1,20 +1,17 @@
 // import todoList from './todo';
 // import UIController from './UIController';
+const defaultProject = {
+  name: 'Default',
+  // value: '0',
+  // todo: [],
+};
+
+const projects = [defaultProject];
 
 const projectList = () => {
-  const defaultProject = {
-    name: 'Default',
-    // value: '0',
-    // todo: [],
-  };
-
-  const projects = [defaultProject];
-
   const addProject = (project) => {
     projects.push({ name: project });
-    console.log(projects);
-    console.log(`Testing ${project}`);
-    // UIController().displayProjects(projects[projects.length - 1]);
+    // console.log(projects);
   };
 
   const deleteProject = (project) => {
@@ -28,4 +25,4 @@ const projectList = () => {
   };
 };
 
-export default projectList;
+export { projectList, projects };
