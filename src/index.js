@@ -3,10 +3,12 @@ import { projects } from './projects';
 
 const controller = () => {
   UIController().navbar();
-  // UIController().proj();
+  UIController().createAppBody();
   UIController().displayProjects(projects);
   // UIController().displayProjects();
   UIController().addNewProjectForm();
+  // UIController().addNewToDoForm();
+  UIController().todos();
 };
 
 controller();

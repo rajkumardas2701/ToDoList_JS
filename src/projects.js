@@ -11,7 +11,6 @@ const projects = [defaultProject];
 const projectList = () => {
   const addProject = (project) => {
     projects.push({ name: project });
-    // console.log(projects);
   };
 
   const deleteProject = (project) => {

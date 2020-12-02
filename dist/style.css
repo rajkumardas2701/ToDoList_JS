@@ -16,29 +16,37 @@ body {
   margin: 0 auto;
 }
 
-.project-section {
+#project-section {
   width: 300px;
   border-right: 2px solid darkslategrey;
   height: 92.5vh;
 }
 
-.project-header {
+#todos-section {
+  border-right: 2px solid darkslategrey;
+  height: 92.5vh;
+  width: 800px;
+}
+
+.project-header,
+.todos-header {
   display: flex;
   flex-direction: column;
   width: 150px;
   margin-bottom: 15px;
   margin: 0 15px 15px 15px;
-
 }
 
-.project-header h2 {
+.project-header h2,
+.todos-header h2 {
   font-family: monospace;
   font-size: 25px;
   align-self: center;
   margin-top: 15px;
 }
 
-.project-header button {
+.project-header button,
+.todos-header button {
   height: 30px;
   background-color: rgb(128, 128, 240);
   color: white;
@@ -54,21 +62,28 @@ body {
   font-weight: bolder;
 }
 
-.new-project-form {
+#new-project-form {
   position: absolute;
-  top: 75px;
-  left: 320px;
+  top: 375px;
+  left: 750px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 99;
+  background: rgba(59, 59, 59, 0.582);
+  width: 400px;
+  height: 150px;
+  border-radius: 10px;
 }
 
 .form-label {
-  margin: 40px;
+  margin: 30px;
+  color: aliceblue;
+  font-weight: bolder;
 }
 
 .form-input {
-  width: 250px;
+  width: 350px;
   height: 40px;
 }
 
@@ -80,8 +95,17 @@ body {
 
 #project-submit {
   width: 100px;
+  background-color: cadetblue;
+  color: aliceblue;
+  font-weight: bolder;
 }
 
 .hide-new-project-form {
   display: none;
+}
+
+#app-body {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
 }

@@ -15,11 +15,11 @@ const UIController = () => {
   };
 
   const proj = () => {
-    const content = document.getElementById('content');
+    const appBody = document.getElementById('app-body');
 
     const projectSection = document.createElement('div');
-    projectSection.setAttribute('class', 'project-section');
-    content.appendChild(projectSection);
+    projectSection.setAttribute('id', 'project-section');
+    appBody.appendChild(projectSection);
 
     const projectSecHeader = document.createElement('div');
     projectSecHeader.setAttribute('class', 'project-header');
@@ -52,7 +52,6 @@ const UIController = () => {
   };
 
   const displayProjects = (projects) => {
-    // console.log(projects);
     const projectLi = document.getElementById('project-list');
     if (projectLi) {
       const project = document.createElement('li');
@@ -92,6 +91,9 @@ const UIController = () => {
       projSubmit.setAttribute('id', 'project-submit');
       projSubmit.innerHTML = 'Submit';
       newProject.appendChild(projSubmit);
+
+      // const changeBack = document.getElementById('project-section');
+      // changeBack.querySelector('#project-section').classList.add('background-project-section');
     }
 
     if (document.getElementById('project-submit')) {
@@ -101,19 +103,66 @@ const UIController = () => {
         displayProjects(document.getElementById('form-input').value);
         const temp = document.getElementById('new-project-form');
         temp.remove();
+        // const removeBack = document.getElementById('project-section');
+        // removeBack.querySelector('#project-section').classList
+        // .remove('background-project-section');
       });
     }
+  };
+
+  const toDoForm = (event) => {
+    event.preventDefault();
+    // console.log('inside to do form');
   };
 
   const addNewProjectForm = () => {
     document.getElementById('add-project-btn').addEventListener('click', projectForm);
   };
 
+  const addNewToDoForm = () => {
+    document.getElementById('add-todos-btn').addEventListener('click', toDoForm);
+  };
+
+  const todos = () => {
+    const appBody = document.getElementById('app-body');
+
+    const todosSection = document.createElement('div');
+    todosSection.setAttribute('id', 'todos-section');
+    appBody.appendChild(todosSection);
+
+    const todosSecHeader = document.createElement('div');
+    todosSecHeader.setAttribute('class', 'todos-header');
+    todosSection.appendChild(todosSecHeader);
+
+    const todosSecHeaderText = document.createElement('h2');
+    todosSecHeader.appendChild(todosSecHeaderText);
+    todosSecHeaderText.innerHTML = 'To-Dos';
+
+    const todosSecHeaderBtn = document.createElement('button');
+    todosSecHeader.appendChild(todosSecHeaderBtn);
+    todosSecHeaderBtn.setAttribute('id', 'add-todos-btn');
+    todosSecHeaderBtn.innerHTML = 'Add Task';
+
+    const todosSecBody = document.createElement('div');
+    todosSecBody.setAttribute('id', 'todos-list');
+    todosSection.appendChild(todosSecBody);
+  };
+
+  const createAppBody = () => {
+    const content = document.getElementById('content');
+    const appBody = document.createElement('div');
+    appBody.setAttribute('id', 'app-body');
+    content.appendChild(appBody);
+  };
+
   return {
-    proj,
     navbar,
+    proj,
     addNewProjectForm,
     displayProjects,
+    todos,
+    createAppBody,
+    addNewToDoForm,
   };
 };
 
