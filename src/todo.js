@@ -27,7 +27,7 @@ const todoList = () => {
 };
 
 const todosArr = [{
-  title: 'First', description: 'Test Desc', dueDate: '2020-12-04', priority: '1', notes: 'Notes',
+  title: 'First', description: 'Test Desc', dueDate: '2020-12-04', priority: 'Low', notes: 'Notes',
 }];
 
 export { todoList, todosArr };

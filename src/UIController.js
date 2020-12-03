@@ -136,6 +136,14 @@ const UIController = () => {
 
       const priority = document.createElement('label');
       priority.innerHTML = `<b>Priority: </b>${todosArr[i].priority}`;
+      if (todosArr[i].priority === 'High') {
+        priority.style.color = 'red';
+      } else if (todosArr[i].priority === 'Medium') {
+        priority.style.color = 'orange';
+      } else {
+        priority.style.color = 'rgb(7, 173, 118)';
+      }
+
       todoObj.appendChild(priority);
 
       const notes = document.createElement('label');
@@ -165,6 +173,13 @@ const UIController = () => {
 
     const priority = document.createElement('label');
     priority.innerHTML = `<b>Priority: </b>${settodo.priority}`;
+    if (settodo.priority === 'High') {
+      priority.style.color = 'red';
+    } else if (settodo.priority === 'Medium') {
+      priority.style.color = 'orange';
+    } else {
+      priority.style.color = 'rgb(7, 173, 118)';
+    }
     todoObj.appendChild(priority);
 
     const notes = document.createElement('label');
@@ -257,17 +272,17 @@ const UIController = () => {
     prioritySec.appendChild(priority);
 
     const priorOpt1 = document.createElement('option');
-    priorOpt1.setAttribute('value', '1');
+    priorOpt1.setAttribute('value', 'High');
     priority.appendChild(priorOpt1);
     priorOpt1.innerHTML = 'High';
 
     const priorOpt2 = document.createElement('option');
-    priorOpt2.setAttribute('value', '2');
+    priorOpt2.setAttribute('value', 'Medium');
     priority.appendChild(priorOpt2);
     priorOpt2.innerHTML = 'Medium';
 
     const priorOpt3 = document.createElement('option');
-    priorOpt3.setAttribute('value', '3');
+    priorOpt3.setAttribute('value', 'Low');
     priority.appendChild(priorOpt3);
     priorOpt3.innerHTML = 'Low';
 
