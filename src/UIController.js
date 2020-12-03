@@ -1,4 +1,6 @@
 import { projectList } from './projects';
+// import { todos } from './todo';
+import { todosArr } from './todo';
 
 const UIController = () => {
   const navbar = () => {
@@ -110,9 +112,85 @@ const UIController = () => {
     }
   };
 
+  const displayTodos = () => {
+    // console.log(todosArr);
+    const todoListSec = document.getElementById('todos-list');
+
+    // const todoObj = document.createElement('div');
+    // todoObj.setAttribute('class', 'to-do-obj');
+    for (let i = 0; i < todosArr.length; i += 1) {
+      const todoObj = document.createElement('div');
+      todoObj.setAttribute('class', 'to-do-obj');
+
+      const list = document.createElement('label');
+      list.innerHTML = `<b>Title: </b>${todosArr[i].title}`;
+      todoObj.appendChild(list);
+
+      const desc = document.createElement('label');
+      desc.innerHTML = `<b>Description: </b>${todosArr[i].description}`;
+      todoObj.appendChild(desc);
+
+      const date = document.createElement('label');
+      date.innerHTML = `<b>Due Date: </b>${todosArr[i].dueDate}`;
+      todoObj.appendChild(date);
+
+      const priority = document.createElement('label');
+      priority.innerHTML = `<b>Priority: </b>${todosArr[i].priority}`;
+      todoObj.appendChild(priority);
+
+      const notes = document.createElement('label');
+      notes.innerHTML = `<b>Note: </b>${todosArr[i].notes}`;
+      todoObj.appendChild(notes);
+
+      todoListSec.appendChild(todoObj);
+    }
+  };
+
+  const updateToDos = (settodo) => {
+    const todoListSec = document.getElementById('todos-list');
+    const todoObj = document.createElement('div');
+    todoObj.setAttribute('class', 'to-do-obj');
+
+    const list = document.createElement('label');
+    list.innerHTML = `<b>Title: </b>${settodo.title}`;
+    todoObj.appendChild(list);
+
+    const desc = document.createElement('label');
+    desc.innerHTML = `<b>Description: </b>${settodo.description}`;
+    todoObj.appendChild(desc);
+
+    const date = document.createElement('label');
+    date.innerHTML = `<b>Due Date: </b>${settodo.dueDate}`;
+    todoObj.appendChild(date);
+
+    const priority = document.createElement('label');
+    priority.innerHTML = `<b>Priority: </b>${settodo.priority}`;
+    todoObj.appendChild(priority);
+
+    const notes = document.createElement('label');
+    notes.innerHTML = `<b>Note: </b>${settodo.notes}`;
+    todoObj.appendChild(notes);
+
+    todoListSec.appendChild(todoObj);
+  };
+
+  const todoSubmitBtn = () => {
+    document.getElementById('todo-submit').addEventListener('click', (event) => {
+      event.preventDefault();
+      const settodo = {
+        title: event.target.form[0].value,
+        description: event.target.form[1].value,
+        dueDate: event.target.form[2].value,
+        priority: event.target.form[3].value,
+        notes: event.target.form[4].value,
+      };
+      todosArr.push(settodo);
+      updateToDos(settodo);
+    });
+  };
+
   const toDoForm = (event) => {
     event.preventDefault();
-    // console.log('event for to do');
     const appBody = document.getElementById('app-body');
 
     const todoFormSec = document.createElement('form');
@@ -123,7 +201,6 @@ const UIController = () => {
     todoHeader.setAttribute('id', 'todo-header');
     todoHeader.innerHTML = 'Create a Task';
     todoFormSec.appendChild(todoHeader);
-
 
     const titleSec = document.createElement('div');
     titleSec.setAttribute('class', 'form-elements');
@@ -213,6 +290,7 @@ const UIController = () => {
     todoFormSec.appendChild(todoSubmit);
 
     document.querySelector('#todos-section').classList.add('todo-add-border');
+    todoSubmitBtn();
   };
 
   const addNewProjectForm = () => {
@@ -263,6 +341,8 @@ const UIController = () => {
     todos,
     createAppBody,
     addNewToDoForm,
+    todoSubmitBtn,
+    displayTodos,
   };
 };
 
