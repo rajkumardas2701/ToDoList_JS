@@ -7,8 +7,8 @@ const controller = () => {
   UIController().displayProjects(projects);
   // UIController().displayProjects();
   UIController().addNewProjectForm();
-  // UIController().addNewToDoForm();
   UIController().todos();
+  UIController().addNewToDoForm();
 };
 
 controller();

@@ -112,7 +112,107 @@ const UIController = () => {
 
   const toDoForm = (event) => {
     event.preventDefault();
-    // console.log('inside to do form');
+    // console.log('event for to do');
+    const appBody = document.getElementById('app-body');
+
+    const todoFormSec = document.createElement('form');
+    todoFormSec.setAttribute('id', 'to-do-form-sec');
+    appBody.appendChild(todoFormSec);
+
+    const todoHeader = document.createElement('h4');
+    todoHeader.setAttribute('id', 'todo-header');
+    todoHeader.innerHTML = 'Create a Task';
+    todoFormSec.appendChild(todoHeader);
+
+
+    const titleSec = document.createElement('div');
+    titleSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(titleSec);
+
+    const titleLab = document.createElement('label');
+    titleLab.setAttribute('class', 'todo-form-label');
+    titleLab.innerHTML = 'Title';
+    titleSec.appendChild(titleLab);
+
+    const titleText = document.createElement('input');
+    titleText.setAttribute('class', 'form-text');
+    titleSec.appendChild(titleText);
+
+
+    const descSec = document.createElement('div');
+    descSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(descSec);
+
+    const descLab = document.createElement('label');
+    descLab.setAttribute('class', 'todo-form-label');
+    descLab.innerHTML = 'Description';
+    descSec.appendChild(descLab);
+
+    const descText = document.createElement('textarea');
+    descText.setAttribute('class', 'form-text');
+    descSec.appendChild(descText);
+
+    const dateSec = document.createElement('div');
+    dateSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(dateSec);
+
+    const dateLab = document.createElement('label');
+    dateLab.setAttribute('class', 'todo-form-label');
+    dateLab.innerHTML = 'Due Date';
+    dateSec.appendChild(dateLab);
+
+    const dateText = document.createElement('input');
+    dateText.setAttribute('type', 'date');
+    dateText.setAttribute('class', 'form-text');
+    dateSec.appendChild(dateText);
+
+    const prioritySec = document.createElement('div');
+    prioritySec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(prioritySec);
+
+    const priorityLab = document.createElement('label');
+    priorityLab.setAttribute('class', 'todo-form-label');
+    priorityLab.innerHTML = 'Priority';
+    prioritySec.appendChild(priorityLab);
+
+    const priority = document.createElement('select');
+    priority.setAttribute('class', 'priority');
+    prioritySec.appendChild(priority);
+
+    const priorOpt1 = document.createElement('option');
+    priorOpt1.setAttribute('value', '1');
+    priority.appendChild(priorOpt1);
+    priorOpt1.innerHTML = 'High';
+
+    const priorOpt2 = document.createElement('option');
+    priorOpt2.setAttribute('value', '2');
+    priority.appendChild(priorOpt2);
+    priorOpt2.innerHTML = 'Medium';
+
+    const priorOpt3 = document.createElement('option');
+    priorOpt3.setAttribute('value', '3');
+    priority.appendChild(priorOpt3);
+    priorOpt3.innerHTML = 'Low';
+
+    const notesSec = document.createElement('div');
+    notesSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(notesSec);
+
+    const notesLab = document.createElement('label');
+    notesLab.setAttribute('class', 'todo-form-label');
+    notesLab.innerHTML = 'Notes';
+    notesSec.appendChild(notesLab);
+
+    const toDonotes = document.createElement('textarea');
+    toDonotes.setAttribute('class', 'form-text');
+    notesSec.appendChild(toDonotes);
+
+    const todoSubmit = document.createElement('button');
+    todoSubmit.setAttribute('id', 'todo-submit');
+    todoSubmit.innerHTML = 'Submit';
+    todoFormSec.appendChild(todoSubmit);
+
+    document.querySelector('#todos-section').classList.add('todo-add-border');
   };
 
   const addNewProjectForm = () => {

@@ -23,9 +23,12 @@ body {
 }
 
 #todos-section {
-  border-right: 2px solid darkslategrey;
   height: 92.5vh;
-  width: 800px;
+  width: 1000px;
+}
+
+.todo-add-border {
+  border-right: 2px solid darkslategrey;
 }
 
 .project-header,
@@ -108,4 +111,48 @@ body {
   display: flex;
   flex-direction: row;
   justify-items: flex-start;
+}
+
+#to-do-form-sec {
+  width: 400px;
+  height: 550px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  margin: 50px auto 10px auto;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.form-elements {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bolder;
+}
+
+.form-elements .form-text,
+.priority {
+  width: 250px;
+}
+
+.form-elements label {
+  margin-bottom: 0;
+}
+
+#todo-header {
+  text-align: center;
+}
+
+#todo-submit {
+  height: 40px;
+  background-color: rgb(128, 128, 240);
+  color: white;
+  font-weight: bolder;
+  width: 200px;
+  align-self: center;
+  margin-top: 10px;
 }
