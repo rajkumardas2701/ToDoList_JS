@@ -1,5 +1,8 @@
 // import todoList from './todo';
 // import UIController from './UIController';
+
+// import { todosArr } from "./todo";
+
 const defaultProject = {
   name: 'Default',
   // value: '0',
@@ -9,8 +12,9 @@ const defaultProject = {
 const projects = [defaultProject];
 
 const projectList = () => {
-  const addProject = (project) => {
-    projects.push({ name: project });
+  const addProject = (project, todos = []) => {
+    projects.push({ name: project, todo: todos });
+    // console.log(projects);
   };
 
   const deleteProject = (project) => {

@@ -76,6 +76,7 @@ const UIController = () => {
       newProject.setAttribute('id', 'new-project-form');
       content.appendChild(newProject);
 
+
       const projectattr = document.createElement('div');
       projectattr.setAttribute('class', 'project-attr');
       newProject.appendChild(projectattr);
@@ -89,6 +90,24 @@ const UIController = () => {
       projNameText.setAttribute('id', 'form-input');
       projectattr.appendChild(projNameText);
 
+      const todoSec = document.createElement('div');
+      todoSec.setAttribute('class', 'todo-sec');
+      newProject.appendChild(todoSec);
+
+      for (let i = 0; i < todosArr.length; i += 1) {
+        const todoAttr = document.createElement('div');
+        todoAttr.setAttribute('class', 'todo-item');
+        todoSec.appendChild(todoAttr);
+
+        const todoLabel = document.createElement('label');
+        todoLabel.setAttribute('class', 'todo-label');
+        todoLabel.innerHTML = `${todosArr[i].title}`;
+        todoAttr.appendChild(todoLabel);
+
+        const todoCheckbox = document.createElement('input');
+        todoCheckbox.setAttribute('type', 'checkbox');
+        todoAttr.appendChild(todoCheckbox);
+      }
       const projSubmit = document.createElement('button');
       projSubmit.setAttribute('id', 'project-submit');
       projSubmit.innerHTML = 'Submit';
@@ -101,7 +120,17 @@ const UIController = () => {
     if (document.getElementById('project-submit')) {
       document.getElementById('project-submit').addEventListener('click', (event) => {
         event.preventDefault();
-        projectList().addProject(document.getElementById('form-input').value);
+        // console.log(event);
+        // console.log(`${event.target.form[1].checked}`);
+        const projTodos = [];
+        for (let i = 0; i < todosArr.length; i += 1) {
+          if (event.target.form[i + 1].checked) {
+            projTodos.push(todosArr[i]);
+          }
+        }
+
+        projectList().addProject(document.getElementById('form-input').value, projTodos);
+        // console.log(projects);
         displayProjects(document.getElementById('form-input').value);
         const temp = document.getElementById('new-project-form');
         temp.remove();
@@ -201,6 +230,9 @@ const UIController = () => {
       };
       todosArr.push(settodo);
       updateToDos(settodo);
+      const temp = document.getElementById('to-do-form-sec');
+      temp.remove();
+      // document.querySelector('#todos-section').classList.add('todo-remove-border');
     });
   };
 

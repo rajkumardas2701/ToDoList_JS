@@ -31,6 +31,10 @@ body {
   border-right: 2px solid darkslategrey;
 }
 
+.todo-remove-border {
+  border: none;
+}
+
 .project-header,
 .todos-header {
   display: flex;
@@ -73,14 +77,14 @@ body {
   flex-direction: column;
   align-items: center;
   z-index: 99;
-  background: rgba(59, 59, 59, 0.582);
+  background: rgba(12, 12, 12, 0.849);
   width: 400px;
-  height: 150px;
+  height: auto;
   border-radius: 10px;
 }
 
 .form-label {
-  margin: 30px;
+  margin: 30px 30px 30px 7px;
   color: aliceblue;
   font-weight: bolder;
 }
@@ -101,6 +105,8 @@ body {
   background-color: cadetblue;
   color: aliceblue;
   font-weight: bolder;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .hide-new-project-form {
@@ -174,4 +180,28 @@ body {
   padding: 5px;
   border-radius: 10px;
   background-color: bisque;
+}
+
+.todo-sec {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-top: 2px solid aqua;
+  width: 85%;
+  padding-top: 10px;
+}
+
+.todo-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.todo-label {
+  color: aliceblue;
+  margin-bottom: 0;
+  margin-right: 5px;
+  font-weight: bold;
 }
