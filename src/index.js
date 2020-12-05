@@ -11,6 +11,7 @@ const controller = () => {
   UIController().addNewToDoForm();
   UIController().displayTodos(todosArr);
   UIController().getProjectTodos();
+  UIController().deleteTodo();
 };
 
 controller();

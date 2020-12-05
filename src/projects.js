@@ -21,10 +21,22 @@ const projectList = () => {
     projects.splice(projects[project.value], 1);
   };
 
+  const deleteTodoFromProj = (deleteTodo) => {
+    for (let i = 0; i < projects.length; i += 1) {
+      for (let j = 0; j < projects[i].todo.length; j += 1) {
+        if (projects[i].todo[j].title === deleteTodo) {
+          projects[i].todo.splice(j, 1);
+        }
+      }
+    }
+    // console.log(projects);
+  };
+
   return {
     deleteProject,
     addProject,
     projects,
+    deleteTodoFromProj,
   };
 };
 

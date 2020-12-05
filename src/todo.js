@@ -1,3 +1,4 @@
+const todosArr = [];
 const todoList = () => {
   // const createToDo = (todo) => {
   //   const settodo = {
@@ -12,9 +13,18 @@ const todoList = () => {
   //   todos.push(settodo);
   // };
 
-  // const deleteToDo = (posi) => {
-  //   todos.splice(todos[posi]);
-  // };
+  const deleteTodoItem = (todoToDel) => {
+    // console.log(todoToDel);
+    // console.log(todosArr);
+    for (let i = 0; i < todosArr.length; i += 1) {
+      if (todosArr[i].title === todoToDel) {
+        // console.log(todosArr[i].title);
+        // console.log(i);
+        todosArr.splice(i, 1);
+      }
+    }
+    // console.log(todosArr);
+  };
 
   // const editToDo = (todo, posi) => {
   //   todos[posi].title = todo.title;
@@ -24,9 +34,9 @@ const todoList = () => {
   //   todos[posi].priority = todo.priority;
   //   todos[posi].project = todo.projVal;
   // };
+  return {
+    deleteTodoItem,
+  };
 };
 
-const todosArr = [];
-// {title: 'First', description: 'Test Desc', dueDate: '2020-12-04', priority: 'Low', notes: 'Notes',
-// },
 export { todoList, todosArr };

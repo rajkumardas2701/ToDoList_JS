@@ -1,6 +1,7 @@
+/* eslint-disable no-use-before-define */
 import { projectList, projects } from './projects';
 // import { todos } from './todo';
-import { todosArr } from './todo';
+import { todoList, todosArr } from './todo';
 
 const UIController = () => {
   const navbar = () => {
@@ -51,6 +52,100 @@ const UIController = () => {
     return {
       displayProjects,
     };
+  };
+
+  const deleteTodo = () => {
+    let currentTodos = [];
+    document.getElementById('todos-list').addEventListener('click', (event) => {
+      const todoToRemove = (event.target.parentElement.parentElement.childNodes[0].textContent).split(' ')[1];
+      todoList().deleteTodoItem(todoToRemove);
+      projectList().deleteTodoFromProj(todoToRemove);
+      const currentproject = document.getElementById('todos-header-text').innerHTML.split(' ')[0];
+      for (let i = 0; i < projects.length; i += 1) {
+        if (projects[i].name === currentproject) {
+          currentTodos = projects[i].todo;
+        }
+      }
+      displayProjectTodos(currentTodos);
+    });
+  };
+
+  const placingTodos = (todoList, todoListSec) => {
+    for (let i = 0; i < todoList.length; i += 1) {
+      const todoObj = document.createElement('div');
+      todoObj.setAttribute('class', 'to-do-obj');
+
+      const list = document.createElement('label');
+      list.innerHTML = `<b>Title: </b>${todoList[i].title}`;
+      todoObj.appendChild(list);
+
+      const desc = document.createElement('label');
+      desc.innerHTML = `<b>Description: </b>${todoList[i].description}`;
+      todoObj.appendChild(desc);
+
+      const date = document.createElement('label');
+      date.innerHTML = `<b>Due Date: </b>${todoList[i].dueDate}`;
+      todoObj.appendChild(date);
+
+      const priority = document.createElement('label');
+      priority.innerHTML = `<b>Priority: </b>${todoList[i].priority}`;
+      if (todoList[i].priority === 'High') {
+        priority.style.color = 'red';
+      } else if (todoList[i].priority === 'Medium') {
+        priority.style.color = 'orange';
+      } else {
+        priority.style.color = 'rgb(7, 173, 118)';
+      }
+
+      todoObj.appendChild(priority);
+
+      const notes = document.createElement('label');
+      notes.innerHTML = `<b>Note: </b>${todoList[i].notes}`;
+      todoObj.appendChild(notes);
+
+      const editDelete = document.createElement('div');
+      editDelete.setAttribute('class', 'edit-delete');
+      todoObj.appendChild(editDelete);
+
+      const edit = document.createElement('i');
+      edit.setAttribute('class', 'far fa-edit');
+      edit.setAttribute('id', 'todo-edit');
+      editDelete.appendChild(edit);
+
+      const del = document.createElement('i');
+      del.setAttribute('class', 'far fa-trash-alt');
+      del.setAttribute('id', 'todo-delete');
+      editDelete.appendChild(del);
+
+      todoListSec.appendChild(todoObj);
+    }
+    deleteTodo();
+  };
+
+  const displayTodos = (todoList) => {
+    // console.log(todoList);
+    const todoListSec = document.getElementById('todos-list');
+    // console.log(todoListSec);
+    if (todoListSec) {
+      // console.log('inside default app display');
+      placingTodos(todoList, todoListSec);
+    } else {
+      // console.log('inside new project display');
+      const todoSecTemp = document.getElementById('todos-section');
+      // console.log(todoSecTemp);
+      const todoListSecTemp = document.createElement('div');
+      todoListSecTemp.setAttribute('id', 'todos-list');
+      todoSecTemp.appendChild(todoListSecTemp);
+      // console.log(todoListSecTemp);
+      placingTodos(todoList, todoListSecTemp);
+    }
+  };
+
+  const displayProjectTodos = (foundTodos) => {
+    const temp = document.getElementById('todos-list');
+    temp.remove();
+    // console.log(foundTodos);
+    displayTodos(foundTodos);
   };
 
   const displayProjects = (projects) => {
@@ -139,86 +234,6 @@ const UIController = () => {
         // .remove('background-project-section');
       });
     }
-  };
-  const placingTodos = (todoList, todoListSec) => {
-    // const todoListSec = document.getElementById('todos-list');
-
-    console.log('inside placingTodos function');
-    // console.log(todoList);
-    for (let i = 0; i < todoList.length; i += 1) {
-      const todoObj = document.createElement('div');
-      todoObj.setAttribute('class', 'to-do-obj');
-
-      const list = document.createElement('label');
-      list.innerHTML = `<b>Title: </b>${todoList[i].title}`;
-      todoObj.appendChild(list);
-
-      const desc = document.createElement('label');
-      desc.innerHTML = `<b>Description: </b>${todoList[i].description}`;
-      todoObj.appendChild(desc);
-
-      const date = document.createElement('label');
-      date.innerHTML = `<b>Due Date: </b>${todoList[i].dueDate}`;
-      todoObj.appendChild(date);
-
-      const priority = document.createElement('label');
-      priority.innerHTML = `<b>Priority: </b>${todoList[i].priority}`;
-      if (todoList[i].priority === 'High') {
-        priority.style.color = 'red';
-      } else if (todoList[i].priority === 'Medium') {
-        priority.style.color = 'orange';
-      } else {
-        priority.style.color = 'rgb(7, 173, 118)';
-      }
-
-      todoObj.appendChild(priority);
-
-      const notes = document.createElement('label');
-      notes.innerHTML = `<b>Note: </b>${todoList[i].notes}`;
-      todoObj.appendChild(notes);
-
-      const editDelete = document.createElement('div');
-      editDelete.setAttribute('class', 'edit-delete');
-      todoObj.appendChild(editDelete);
-
-      const edit = document.createElement('i');
-      edit.setAttribute('class', 'far fa-edit');
-      edit.setAttribute('id', 'todo-edit');
-      editDelete.appendChild(edit);
-
-      const del = document.createElement('i');
-      del.setAttribute('class', 'far fa-trash-alt');
-      del.setAttribute('id', 'todo-delete');
-      editDelete.appendChild(del);
-
-      todoListSec.appendChild(todoObj);
-    }
-  };
-
-  const displayTodos = (todoList) => {
-    // console.log(todoList);
-    const todoListSec = document.getElementById('todos-list');
-    // console.log(todoListSec);
-    if (todoListSec) {
-      // console.log('inside default app display');
-      placingTodos(todoList, todoListSec);
-    } else {
-      // console.log('inside new project display');
-      const todoSecTemp = document.getElementById('todos-section');
-      // console.log(todoSecTemp);
-      const todoListSecTemp = document.createElement('div');
-      todoListSecTemp.setAttribute('id', 'todos-list');
-      todoSecTemp.appendChild(todoListSecTemp);
-      // console.log(todoListSecTemp);
-      placingTodos(todoList, todoListSecTemp);
-    }
-  };
-
-  const displayProjectTodos = (foundTodos) => {
-    const temp = document.getElementById('todos-list');
-    temp.remove();
-    // console.log(foundTodos);
-    displayTodos(foundTodos);
   };
 
   const updateToDos = (settodo) => {
@@ -412,8 +427,9 @@ const UIController = () => {
     todosSection.appendChild(todosSecHeader);
 
     const todosSecHeaderText = document.createElement('h2');
+    todosSecHeaderText.setAttribute('id', 'todos-header-text');
     todosSecHeader.appendChild(todosSecHeaderText);
-    todosSecHeaderText.innerHTML = 'To-Dos';
+    todosSecHeaderText.innerHTML = 'Default To-Dos';
 
     const todosSecHeaderBtn = document.createElement('button');
     todosSecHeader.appendChild(todosSecHeaderBtn);
@@ -441,6 +457,8 @@ const UIController = () => {
           foundTodos = projects[i].todo;
         }
       }
+      const todosHeaderUpdate = document.getElementById('todos-header-text');
+      todosHeaderUpdate.innerHTML = `${event.target.textContent} To-Dos`;
       // console.log(foundTodos);
       displayProjectTodos(foundTodos);
     });
@@ -457,6 +475,7 @@ const UIController = () => {
     todoSubmitBtn,
     displayTodos,
     getProjectTodos,
+    deleteTodo,
   };
 };
 
