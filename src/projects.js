@@ -1,12 +1,12 @@
 // import todoList from './todo';
 // import UIController from './UIController';
 
-// import { todosArr } from "./todo";
+import { todosArr } from './todo';
 
 const defaultProject = {
   name: 'Default',
   // value: '0',
-  // todo: [],
+  todo: todosArr,
 };
 
 const projects = [defaultProject];

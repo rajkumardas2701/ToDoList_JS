@@ -1,4 +1,4 @@
-import { projectList } from './projects';
+import { projectList, projects } from './projects';
 // import { todos } from './todo';
 import { todosArr } from './todo';
 
@@ -140,34 +140,32 @@ const UIController = () => {
       });
     }
   };
+  const placingTodos = (todoList, todoListSec) => {
+    // const todoListSec = document.getElementById('todos-list');
 
-  const displayTodos = () => {
-    // console.log(todosArr);
-    const todoListSec = document.getElementById('todos-list');
-
-    // const todoObj = document.createElement('div');
-    // todoObj.setAttribute('class', 'to-do-obj');
-    for (let i = 0; i < todosArr.length; i += 1) {
+    // console.log('inside placingTodos function');
+    // console.log(todoList);
+    for (let i = 0; i < todoList.length; i += 1) {
       const todoObj = document.createElement('div');
       todoObj.setAttribute('class', 'to-do-obj');
 
       const list = document.createElement('label');
-      list.innerHTML = `<b>Title: </b>${todosArr[i].title}`;
+      list.innerHTML = `<b>Title: </b>${todoList[i].title}`;
       todoObj.appendChild(list);
 
       const desc = document.createElement('label');
-      desc.innerHTML = `<b>Description: </b>${todosArr[i].description}`;
+      desc.innerHTML = `<b>Description: </b>${todoList[i].description}`;
       todoObj.appendChild(desc);
 
       const date = document.createElement('label');
-      date.innerHTML = `<b>Due Date: </b>${todosArr[i].dueDate}`;
+      date.innerHTML = `<b>Due Date: </b>${todoList[i].dueDate}`;
       todoObj.appendChild(date);
 
       const priority = document.createElement('label');
-      priority.innerHTML = `<b>Priority: </b>${todosArr[i].priority}`;
-      if (todosArr[i].priority === 'High') {
+      priority.innerHTML = `<b>Priority: </b>${todoList[i].priority}`;
+      if (todoList[i].priority === 'High') {
         priority.style.color = 'red';
-      } else if (todosArr[i].priority === 'Medium') {
+      } else if (todoList[i].priority === 'Medium') {
         priority.style.color = 'orange';
       } else {
         priority.style.color = 'rgb(7, 173, 118)';
@@ -176,11 +174,37 @@ const UIController = () => {
       todoObj.appendChild(priority);
 
       const notes = document.createElement('label');
-      notes.innerHTML = `<b>Note: </b>${todosArr[i].notes}`;
+      notes.innerHTML = `<b>Note: </b>${todoList[i].notes}`;
       todoObj.appendChild(notes);
-
+      // console.log('working till here');
       todoListSec.appendChild(todoObj);
     }
+  };
+
+  const displayTodos = (todoList) => {
+    // console.log(todoList);
+    const todoListSec = document.getElementById('todos-list');
+    // console.log(todoListSec);
+    if (todoListSec) {
+      // console.log('inside default app display');
+      placingTodos(todoList, todoListSec);
+    } else {
+      // console.log('inside new project display');
+      const todoSecTemp = document.getElementById('todos-section');
+      // console.log(todoSecTemp);
+      const todoListSecTemp = document.createElement('div');
+      todoListSecTemp.setAttribute('id', 'todos-list');
+      todoSecTemp.appendChild(todoListSecTemp);
+      // console.log(todoListSecTemp);
+      placingTodos(todoList, todoListSecTemp);
+    }
+  };
+
+  const displayProjectTodos = (foundTodos) => {
+    const temp = document.getElementById('todos-list');
+    temp.remove();
+    // console.log(foundTodos);
+    displayTodos(foundTodos);
   };
 
   const updateToDos = (settodo) => {
@@ -361,7 +385,7 @@ const UIController = () => {
 
     const todosSecHeaderText = document.createElement('h2');
     todosSecHeader.appendChild(todosSecHeaderText);
-    todosSecHeaderText.innerHTML = 'To-Dos';
+    todosSecHeaderText.innerHTML = 'All To-Dos';
 
     const todosSecHeaderBtn = document.createElement('button');
     todosSecHeader.appendChild(todosSecHeaderBtn);
@@ -380,6 +404,22 @@ const UIController = () => {
     content.appendChild(appBody);
   };
 
+  const getProjectTodos = () => {
+    document.getElementById('project-list').addEventListener('click', (event) => {
+      // console.log(projects[0].name);
+      // console.log(event.target.textContent);
+      let foundTodos = [];
+      for (let i = 0; i < projects.length; i += 1) {
+        if (projects[i].name === event.target.textContent) {
+          // console.log(`found a match at ${projects[i].name} and todos are ${projects[i].todo}}`);
+          foundTodos = projects[i].todo;
+        }
+      }
+      // console.log(foundTodos);
+      displayProjectTodos(foundTodos);
+    });
+  };
+
   return {
     navbar,
     proj,
@@ -390,6 +430,7 @@ const UIController = () => {
     addNewToDoForm,
     todoSubmitBtn,
     displayTodos,
+    getProjectTodos,
   };
 };
 

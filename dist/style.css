@@ -39,7 +39,7 @@ body {
 .todos-header {
   display: flex;
   flex-direction: column;
-  width: 150px;
+  width: 200px;
   margin-bottom: 15px;
   margin: 0 15px 15px 15px;
 }
@@ -204,4 +204,8 @@ body {
   margin-bottom: 0;
   margin-right: 5px;
   font-weight: bold;
+}
+
+.hide-to-do-obj {
+  display: none;
 }
