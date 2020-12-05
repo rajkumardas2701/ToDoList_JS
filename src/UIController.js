@@ -143,7 +143,7 @@ const UIController = () => {
   const placingTodos = (todoList, todoListSec) => {
     // const todoListSec = document.getElementById('todos-list');
 
-    // console.log('inside placingTodos function');
+    console.log('inside placingTodos function');
     // console.log(todoList);
     for (let i = 0; i < todoList.length; i += 1) {
       const todoObj = document.createElement('div');
@@ -176,7 +176,21 @@ const UIController = () => {
       const notes = document.createElement('label');
       notes.innerHTML = `<b>Note: </b>${todoList[i].notes}`;
       todoObj.appendChild(notes);
-      // console.log('working till here');
+
+      const editDelete = document.createElement('div');
+      editDelete.setAttribute('class', 'edit-delete');
+      todoObj.appendChild(editDelete);
+
+      const edit = document.createElement('i');
+      edit.setAttribute('class', 'far fa-edit');
+      edit.setAttribute('id', 'todo-edit');
+      editDelete.appendChild(edit);
+
+      const del = document.createElement('i');
+      del.setAttribute('class', 'far fa-trash-alt');
+      del.setAttribute('id', 'todo-delete');
+      editDelete.appendChild(del);
+
       todoListSec.appendChild(todoObj);
     }
   };
@@ -238,6 +252,20 @@ const UIController = () => {
     const notes = document.createElement('label');
     notes.innerHTML = `<b>Note: </b>${settodo.notes}`;
     todoObj.appendChild(notes);
+
+    const editDelete = document.createElement('div');
+    editDelete.setAttribute('class', 'edit-delete');
+    todoObj.appendChild(editDelete);
+
+    const edit = document.createElement('i');
+    edit.setAttribute('class', 'far fa-edit');
+    edit.setAttribute('id', 'todo-edit');
+    editDelete.appendChild(edit);
+
+    const del = document.createElement('i');
+    del.setAttribute('class', 'far fa-trash-alt');
+    del.setAttribute('id', 'todo-delete');
+    editDelete.appendChild(del);
 
     todoListSec.appendChild(todoObj);
   };
@@ -385,7 +413,7 @@ const UIController = () => {
 
     const todosSecHeaderText = document.createElement('h2');
     todosSecHeader.appendChild(todosSecHeaderText);
-    todosSecHeaderText.innerHTML = 'All To-Dos';
+    todosSecHeaderText.innerHTML = 'To-Dos';
 
     const todosSecHeaderBtn = document.createElement('button');
     todosSecHeader.appendChild(todosSecHeaderBtn);
@@ -406,8 +434,6 @@ const UIController = () => {
 
   const getProjectTodos = () => {
     document.getElementById('project-list').addEventListener('click', (event) => {
-      // console.log(projects[0].name);
-      // console.log(event.target.textContent);
       let foundTodos = [];
       for (let i = 0; i < projects.length; i += 1) {
         if (projects[i].name === event.target.textContent) {

@@ -209,3 +209,16 @@ body {
 .hide-to-do-obj {
   display: none;
 }
+
+.edit-delete {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px auto;
+  width: 100px;
+}
+
+.edit-delete i {
+  cursor: pointer;
+}
