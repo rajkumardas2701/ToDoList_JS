@@ -17,6 +17,14 @@ const projectList = () => {
     // console.log(projects);
   };
 
+  const updateProject = (proj, addTodo) => {
+    for (let i = 0; i < projects.length; i += 1) {
+      if (projects[i].name === proj) {
+        projects[i].todo.push(addTodo);
+      }
+    }
+  };
+
   const deleteProject = (project) => {
     projects.splice(projects[project.value], 1);
   };
@@ -37,6 +45,7 @@ const projectList = () => {
     addProject,
     projects,
     deleteTodoFromProj,
+    updateProject,
   };
 };
 

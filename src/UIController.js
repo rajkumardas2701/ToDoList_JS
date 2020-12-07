@@ -302,6 +302,12 @@ const UIController = () => {
       };
       todosArr.push(settodo);
       updateToDos(settodo);
+
+      const proj = document.getElementById('todos-header-text').innerHTML.split(' ')[0];
+      // console.log(settodo);
+      if (proj !== 'Default') {
+        projectList().updateProject(proj, settodo);
+      }
       const temp = document.getElementById('to-do-form-sec');
       temp.remove();
     });
