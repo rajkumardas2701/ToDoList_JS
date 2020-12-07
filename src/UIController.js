@@ -56,17 +56,21 @@ const UIController = () => {
 
   const deleteTodo = () => {
     let currentTodos = [];
-    document.getElementById('todos-list').addEventListener('click', (event) => {
-      const todoToRemove = (event.target.parentElement.parentElement.childNodes[0].textContent).split(' ')[1];
-      todoList().deleteTodoItem(todoToRemove);
-      projectList().deleteTodoFromProj(todoToRemove);
-      const currentproject = document.getElementById('todos-header-text').innerHTML.split(' ')[0];
-      for (let i = 0; i < projects.length; i += 1) {
-        if (projects[i].name === currentproject) {
-          currentTodos = projects[i].todo;
-        }
+    document.getElementById('todos-list').addEventListener('click', () => {
+      if (document.getElementById('todo-delete')) {
+        document.getElementById('todo-delete').addEventListener('click', (event) => {
+          const todoToRemove = (event.target.parentElement.parentElement.childNodes[0].textContent).split(' ')[1];
+          todoList().deleteTodoItem(todoToRemove);
+          projectList().deleteTodoFromProj(todoToRemove);
+          const currentproject = document.getElementById('todos-header-text').innerHTML.split(' ')[0];
+          for (let i = 0; i < projects.length; i += 1) {
+            if (projects[i].name === currentproject) {
+              currentTodos = projects[i].todo;
+            }
+          }
+          displayProjectTodos(currentTodos);
+        });
       }
-      displayProjectTodos(currentTodos);
     });
   };
 
@@ -139,13 +143,14 @@ const UIController = () => {
       // console.log(todoListSecTemp);
       placingTodos(todoList, todoListSecTemp);
     }
+    deleteTodo();
   };
 
   const displayProjectTodos = (foundTodos) => {
     const temp = document.getElementById('todos-list');
     temp.remove();
-    // console.log(foundTodos);
     displayTodos(foundTodos);
+    deleteTodo();
   };
 
   const displayProjects = (projects) => {
@@ -299,7 +304,6 @@ const UIController = () => {
       updateToDos(settodo);
       const temp = document.getElementById('to-do-form-sec');
       temp.remove();
-      // document.querySelector('#todos-section').classList.add('todo-remove-border');
     });
   };
 
@@ -328,7 +332,6 @@ const UIController = () => {
     const titleText = document.createElement('input');
     titleText.setAttribute('class', 'form-text');
     titleSec.appendChild(titleText);
-
 
     const descSec = document.createElement('div');
     descSec.setAttribute('class', 'form-elements');
@@ -403,7 +406,7 @@ const UIController = () => {
     todoSubmit.innerHTML = 'Submit';
     todoFormSec.appendChild(todoSubmit);
 
-    document.querySelector('#todos-section').classList.add('todo-add-border');
+    // document.querySelector('#todos-section').classList.add('todo-add-border');
     todoSubmitBtn();
   };
 
@@ -453,13 +456,11 @@ const UIController = () => {
       let foundTodos = [];
       for (let i = 0; i < projects.length; i += 1) {
         if (projects[i].name === event.target.textContent) {
-          // console.log(`found a match at ${projects[i].name} and todos are ${projects[i].todo}}`);
           foundTodos = projects[i].todo;
         }
       }
       const todosHeaderUpdate = document.getElementById('todos-header-text');
       todosHeaderUpdate.innerHTML = `${event.target.textContent} To-Dos`;
-      // console.log(foundTodos);
       displayProjectTodos(foundTodos);
     });
   };
