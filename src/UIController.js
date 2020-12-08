@@ -327,6 +327,7 @@ const UIController = () => {
       };
       changeToDoInArr(prevTitle, tempToDo);
       projectList().editToDofromProj(prevTitle, tempToDo);
+      getProjectTodosAfterEdit();
       // console.log(tempToDo);
       // console.log(prevTitle);
       const temp = document.getElementById('to-do-form-sec');
@@ -643,6 +644,21 @@ const UIController = () => {
       todosHeaderUpdate.innerHTML = `${event.target.textContent} To-Dos`;
       displayProjectTodos(foundTodos);
     });
+  };
+
+  const getProjectTodosAfterEdit = () => {
+    const currentproj = document.getElementById('todos-header-text').innerHTML.split(' ')[0];
+    let foundTodo = [];
+    for (let i = 0; i < projects.length; i += 1) {
+      if (projects[i].name === currentproj) {
+        foundTodo = projects[i].todo;
+      }
+    }
+    if (currentproj !== 'Default') {
+      displayProjectTodos(foundTodo);
+    } else {
+      displayProjectTodos(todosArr);
+    }
   };
 
   return {
