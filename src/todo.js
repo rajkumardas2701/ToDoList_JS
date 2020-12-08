@@ -14,16 +14,11 @@ const todoList = () => {
   // };
 
   const deleteTodoItem = (todoToDel) => {
-    // console.log(todoToDel);
-    // console.log(todosArr);
     for (let i = 0; i < todosArr.length; i += 1) {
       if (todosArr[i].title === todoToDel) {
-        // console.log(todosArr[i].title);
-        // console.log(i);
         todosArr.splice(i, 1);
       }
     }
-    // console.log(todosArr);
   };
 
   // const editToDo = (todo, posi) => {

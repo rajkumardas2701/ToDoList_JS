@@ -124,6 +124,7 @@ const UIController = () => {
       todoListSec.appendChild(todoObj);
     }
     deleteTodo();
+    editTodos();
   };
 
   const displayTodos = (todoList) => {
@@ -150,7 +151,8 @@ const UIController = () => {
     const temp = document.getElementById('todos-list');
     temp.remove();
     displayTodos(foundTodos);
-    deleteTodo();
+    // deleteTodo();
+    // editTodo();
   };
 
   const displayProjects = (projects) => {
@@ -304,13 +306,47 @@ const UIController = () => {
       updateToDos(settodo);
 
       const proj = document.getElementById('todos-header-text').innerHTML.split(' ')[0];
-      // console.log(settodo);
       if (proj !== 'Default') {
         projectList().updateProject(proj, settodo);
       }
       const temp = document.getElementById('to-do-form-sec');
       temp.remove();
     });
+  };
+
+  const todoEditSubmitBtn = (prevTitle) => {
+    document.getElementById('todo-edit-submit').addEventListener('click', (event) => {
+      event.preventDefault();
+      // console.log(event);
+      const tempToDo = {
+        title: event.target.form[0].value,
+        description: event.target.form[1].value,
+        dueDate: event.target.form[2].value,
+        priority: event.target.form[3].value,
+        notes: event.target.form[4].value,
+      };
+      changeToDoInArr(prevTitle, tempToDo);
+      projectList().editToDofromProj(prevTitle, tempToDo);
+      // console.log(tempToDo);
+      // console.log(prevTitle);
+      const temp = document.getElementById('to-do-form-sec');
+      temp.remove();
+    });
+  };
+
+  const changeToDoInArr = (prev, newTodo) => {
+    for (let i = 0; i < todosArr.length; i += 1) {
+      if (todosArr[i].title === prev) {
+        todosArr[i].title = newTodo.title;
+        todosArr[i].description = newTodo.description;
+        todosArr[i].dueDate = newTodo.dueDate;
+        todosArr[i].priority = newTodo.priority;
+        todosArr[i].notes = newTodo.notes;
+        break;
+      }
+    }
+    // console.log(todosArr);
+    // displayProjectTodos(todosArr);
   };
 
   const toDoForm = (event) => {
@@ -424,6 +460,144 @@ const UIController = () => {
     document.getElementById('add-todos-btn').addEventListener('click', toDoForm);
   };
 
+  const editTodos = () => {
+    document.getElementById('todos-list').addEventListener('click', () => {
+      if (document.getElementById('todo-edit')) {
+        document.getElementById('todo-edit').addEventListener('click', (event) => {
+          editTodoForm(event.target.parentNode.parentNode.firstChild.innerText.split(' ')[1]);
+        });
+      }
+    });
+  };
+
+  const editTodoForm = (editTodoItem) => {
+    let toChangeTodo = {};
+    for (let i = 0; i < todosArr.length; i += 1) {
+      if (todosArr[i].title === editTodoItem) {
+        toChangeTodo = {
+          title: `${todosArr[i].title}`,
+          description: `${todosArr[i].description}`,
+          dueDate: `${todosArr[i].dueDate}`,
+          priority: `${todosArr[i].priority}`,
+          notes: `${todosArr[i].notes}`,
+        };
+      }
+    }
+    // console.log(toChangeTodo);
+    editTodoFormDisplay(toChangeTodo);
+  };
+
+  const editTodoFormDisplay = (changeTodo) => {
+    const appBody = document.getElementById('app-body');
+
+    const todoFormSec = document.createElement('form');
+    todoFormSec.setAttribute('id', 'to-do-form-sec');
+    appBody.appendChild(todoFormSec);
+
+    const todoHeader = document.createElement('h4');
+    todoHeader.setAttribute('id', 'todo-header');
+    todoHeader.innerHTML = 'Edit Task';
+    todoFormSec.appendChild(todoHeader);
+
+    const titleSec = document.createElement('div');
+    titleSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(titleSec);
+
+    const titleLab = document.createElement('label');
+    titleLab.setAttribute('class', 'todo-form-label');
+    titleLab.innerHTML = 'Title';
+    titleSec.appendChild(titleLab);
+
+    const titleText = document.createElement('input');
+    titleText.setAttribute('class', 'form-text');
+    titleText.value = `${changeTodo.title}`;
+    titleSec.appendChild(titleText);
+
+    const descSec = document.createElement('div');
+    descSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(descSec);
+
+    const descLab = document.createElement('label');
+    descLab.setAttribute('class', 'todo-form-label');
+    descLab.innerHTML = 'Description';
+    descSec.appendChild(descLab);
+
+    const descText = document.createElement('textarea');
+    descText.setAttribute('class', 'form-text');
+    descText.value = `${changeTodo.description}`;
+    descSec.appendChild(descText);
+
+    const dateSec = document.createElement('div');
+    dateSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(dateSec);
+
+    const dateLab = document.createElement('label');
+    dateLab.setAttribute('class', 'todo-form-label');
+    dateLab.innerHTML = 'Due Date';
+    dateSec.appendChild(dateLab);
+
+    const dateText = document.createElement('input');
+    dateText.setAttribute('type', 'date');
+    dateText.setAttribute('class', 'form-text');
+    dateText.value = `${changeTodo.dueDate}`;
+    dateSec.appendChild(dateText);
+
+    const prioritySec = document.createElement('div');
+    prioritySec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(prioritySec);
+
+    const priorityLab = document.createElement('label');
+    priorityLab.setAttribute('class', 'todo-form-label');
+    priorityLab.innerHTML = 'Priority';
+    prioritySec.appendChild(priorityLab);
+
+    const priority = document.createElement('select');
+    priority.setAttribute('id', 'priority');
+    priority.value = `${changeTodo.priority}`;
+    prioritySec.appendChild(priority);
+
+    const priorOpt1 = document.createElement('option');
+    priorOpt1.setAttribute('value', 'High');
+    priority.appendChild(priorOpt1);
+    priorOpt1.innerHTML = 'High';
+
+    const priorOpt2 = document.createElement('option');
+    priorOpt2.setAttribute('value', 'Medium');
+    priority.appendChild(priorOpt2);
+    priorOpt2.innerHTML = 'Medium';
+
+    const priorOpt3 = document.createElement('option');
+    priorOpt3.setAttribute('value', 'Low');
+    priority.appendChild(priorOpt3);
+    priorOpt3.innerHTML = 'Low';
+
+    for (let i = 0; i < priority.options.length; i += 1) {
+      if (priority.options[i].value === changeTodo.priority) {
+        priority.options[i].selected = true;
+      }
+    }
+
+    const notesSec = document.createElement('div');
+    notesSec.setAttribute('class', 'form-elements');
+    todoFormSec.appendChild(notesSec);
+
+    const notesLab = document.createElement('label');
+    notesLab.setAttribute('class', 'todo-form-label');
+    notesLab.innerHTML = 'Notes';
+    notesSec.appendChild(notesLab);
+
+    const toDonotes = document.createElement('textarea');
+    toDonotes.setAttribute('class', 'form-text');
+    toDonotes.value = `${changeTodo.notes}`;
+    notesSec.appendChild(toDonotes);
+
+    const todoSubmit = document.createElement('button');
+    todoSubmit.setAttribute('id', 'todo-edit-submit');
+    todoSubmit.innerHTML = 'Submit';
+    todoFormSec.appendChild(todoSubmit);
+    todoEditSubmitBtn(changeTodo.title);
+  };
+
   const todos = () => {
     const appBody = document.getElementById('app-body');
 
@@ -483,6 +657,7 @@ const UIController = () => {
     displayTodos,
     getProjectTodos,
     deleteTodo,
+    editTodos,
   };
 };
 

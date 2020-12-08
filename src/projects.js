@@ -12,9 +12,23 @@ const defaultProject = {
 const projects = [defaultProject];
 
 const projectList = () => {
+  const editToDofromProj = (prev, newTodo) => {
+    // console.log('Inside edit to do from Proj');
+    for (let i = 0; i < projects.length; i += 1) {
+      for (let j = 0; j < projects[i].todo.length; j += 1) {
+        if (projects[i].todo[j].title === prev) {
+          projects[i].todo[j].title = newTodo.title;
+          projects[i].todo[j].description = newTodo.description;
+          projects[i].todo[j].dueDate = newTodo.dueDate;
+          projects[i].todo[j].priority = newTodo.priority;
+          projects[i].todo[j].notes = newTodo.notes;
+        }
+      }
+    }
+  };
+
   const addProject = (project, todos = []) => {
     projects.push({ name: project, todo: todos });
-    // console.log(projects);
   };
 
   const updateProject = (proj, addTodo) => {
@@ -46,6 +60,7 @@ const projectList = () => {
     projects,
     deleteTodoFromProj,
     updateProject,
+    editToDofromProj,
   };
 };
 

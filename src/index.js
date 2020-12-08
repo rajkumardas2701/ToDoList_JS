@@ -12,6 +12,7 @@ const controller = () => {
   UIController().displayTodos(todosArr);
   UIController().getProjectTodos();
   UIController().deleteTodo();
+  UIController().editTodos();
 };
 
 controller();

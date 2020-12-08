@@ -141,7 +141,8 @@ body {
 }
 
 .form-elements .form-text,
-.priority {
+.priority,
+#priority {
   width: 250px;
 }
 
@@ -153,7 +154,8 @@ body {
   text-align: center;
 }
 
-#todo-submit {
+#todo-submit,
+#todo-edit-submit {
   height: 40px;
   background-color: rgb(128, 128, 240);
   color: white;
