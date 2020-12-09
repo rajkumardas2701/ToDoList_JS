@@ -9,11 +9,15 @@ const defaultProject = {
   todo: todosArr,
 };
 
-const projects = [defaultProject];
+const projects = JSON.parse(localStorage.getItem('projects'))
+  ? JSON.parse(localStorage.getItem('projects')) : [defaultProject];
 
 const projectList = () => {
+  const updateProjectInLocalStorage = () => {
+    localStorage.setItem('projects', JSON.stringify(projects));
+  };
+
   const editToDofromProj = (prev, newTodo) => {
-    // console.log('Inside edit to do from Proj');
     for (let i = 0; i < projects.length; i += 1) {
       for (let j = 0; j < projects[i].todo.length; j += 1) {
         if (projects[i].todo[j].title === prev) {
@@ -25,22 +29,26 @@ const projectList = () => {
         }
       }
     }
+    updateProjectInLocalStorage();
   };
 
   const addProject = (project, todos = []) => {
     projects.push({ name: project, todo: todos });
+    updateProjectInLocalStorage();
   };
 
   const updateProject = (proj, addTodo) => {
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].name === proj) {
         projects[i].todo.push(addTodo);
+        updateProjectInLocalStorage();
       }
     }
   };
 
   const deleteProject = (project) => {
     projects.splice(projects[project.value], 1);
+    updateProjectInLocalStorage();
   };
 
   const deleteTodoFromProj = (deleteTodo) => {
@@ -52,6 +60,7 @@ const projectList = () => {
       }
     }
     // console.log(projects);
+    updateProjectInLocalStorage();
   };
 
   return {
@@ -61,6 +70,7 @@ const projectList = () => {
     deleteTodoFromProj,
     updateProject,
     editToDofromProj,
+    updateProjectInLocalStorage,
   };
 };
 
