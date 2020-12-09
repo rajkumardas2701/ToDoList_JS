@@ -12,6 +12,8 @@ const defaultProject = {
 const projects = JSON.parse(localStorage.getItem('projects'))
   ? JSON.parse(localStorage.getItem('projects')) : [defaultProject];
 
+// const projects = [defaultProject];
+
 const projectList = () => {
   const updateProjectInLocalStorage = () => {
     localStorage.setItem('projects', JSON.stringify(projects));
@@ -35,6 +37,7 @@ const projectList = () => {
   const addProject = (project, todos = []) => {
     projects.push({ name: project, todo: todos });
     updateProjectInLocalStorage();
+    // console.log(projects);
   };
 
   const updateProject = (proj, addTodo) => {
@@ -46,8 +49,13 @@ const projectList = () => {
     }
   };
 
-  const deleteProject = (project) => {
-    projects.splice(projects[project.value], 1);
+  const deleteProj = (project) => {
+    // console.log(project);
+    for (let i = 0; i < projects.length; i += 1) {
+      if (projects[i].name === project && projects[i].name !== 'Default') {
+        projects.splice(i, 1);
+      }
+    }
     updateProjectInLocalStorage();
   };
 
@@ -64,7 +72,7 @@ const projectList = () => {
   };
 
   return {
-    deleteProject,
+    deleteProj,
     addProject,
     projects,
     deleteTodoFromProj,

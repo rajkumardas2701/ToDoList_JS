@@ -41,18 +41,40 @@ const UIController = () => {
     projectSecBody.setAttribute('id', 'project-list');
     projectSection.appendChild(projectSecBody);
 
-    const displayProjects = (projects) => {
-      for (let i = 0; i < projects.length; i += 1) {
-        const project = document.createElement('li');
+    const displayProjects = (project1) => {
+      for (let i = 0; i < project1.length; i += 1) {
+        const projectRow = document.createElement('li');
+        projectRow.setAttribute('class', 'project-row');
+        projectSecBody.appendChild(projectRow);
+
+        const project = document.createElement('div');
         project.setAttribute('class', 'project');
-        project.innerHTML = `${projects[i].name}`;
-        projectSecBody.appendChild(project);
+        project.innerHTML = `${project1[i].name}`;
+        projectRow.appendChild(project);
+        if (projects[i].name !== 'Default') {
+          const deleteProj = document.createElement('div');
+          deleteProj.setAttribute('class', 'delete-proj-icon far fa-trash-alt');
+          projectRow.appendChild(deleteProj);
+        }
       }
     };
     return {
       displayProjects,
     };
   };
+
+  // const deleteProject = () => {
+  //   const projectRows = document.querySelectorAll('.project-row');
+  //   console.log(projectRows);
+  //   projectRows.forEach(row1 => row1.addEventListener('click', (event) => {
+  //     event.preventDefault();
+  //     console.log(event);
+  //     // console.log(event.target.parentNode.innerText);
+  //     projectList().deleteProj(event.target.parentNode.innerText);
+  //     // console.log(projects);
+  //     displayProjects(projects);
+  //   }));
+  // };
 
   const deleteTodo = () => {
     let currentTodos = [];
@@ -147,23 +169,34 @@ const UIController = () => {
     deleteTodo();
   };
 
-  const displayProjectTodos = (foundTodos) => {
+  const displayProjectTodos = (foundTodos = []) => {
     const temp = document.getElementById('todos-list');
     temp.remove();
+    // console.log(projects);
     displayTodos(foundTodos);
-    // deleteTodo();
-    // editTodo();
+    deleteTodo();
+    editTodos();
   };
 
-  const displayProjects = (projects) => {
+  const displayProjects = (project1) => {
     const projectLi = document.getElementById('project-list');
     if (projectLi) {
-      const project = document.createElement('li');
+      const projectRow = document.createElement('li');
+      projectRow.setAttribute('class', 'project-row');
+      projectLi.appendChild(projectRow);
+
+      const project = document.createElement('div');
       project.setAttribute('class', 'project');
-      project.innerHTML = `${projects}`;
-      projectLi.appendChild(project);
+      project.innerHTML = `${project1}`;
+      projectRow.appendChild(project);
+
+      if (projects !== 'Default') {
+        const deleteProj = document.createElement('div');
+        deleteProj.setAttribute('class', 'delete-proj-icon far fa-trash-alt');
+        projectRow.appendChild(deleteProj);
+      }
     } else {
-      proj().displayProjects(projects);
+      proj().displayProjects(project1);
     }
   };
 
@@ -232,7 +265,7 @@ const UIController = () => {
         }
 
         projectList().addProject(document.getElementById('form-input').value, projTodos);
-        // console.log(projects);
+        // console.log(document.getElementById('form-input').value);
         displayProjects(document.getElementById('form-input').value);
         const temp = document.getElementById('new-project-form');
         temp.remove();
@@ -303,6 +336,7 @@ const UIController = () => {
         notes: event.target.form[4].value,
       };
       todosArr.push(settodo);
+      todoList().updateTodosInLocalStorage();
       updateToDos(settodo);
 
       const proj = document.getElementById('todos-header-text').innerHTML.split(' ')[0];
@@ -346,6 +380,7 @@ const UIController = () => {
         break;
       }
     }
+    todoList().updateTodosInLocalStorage();
     // console.log(todosArr);
     // displayProjectTodos(todosArr);
   };
@@ -634,6 +669,7 @@ const UIController = () => {
 
   const getProjectTodos = () => {
     document.getElementById('project-list').addEventListener('click', (event) => {
+      // console.log(event.target.textContent);
       let foundTodos = [];
       for (let i = 0; i < projects.length; i += 1) {
         if (projects[i].name === event.target.textContent) {
@@ -674,6 +710,7 @@ const UIController = () => {
     getProjectTodos,
     deleteTodo,
     editTodos,
+    // deleteProject,
   };
 };
 

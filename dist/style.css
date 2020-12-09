@@ -60,13 +60,24 @@ body {
   font-weight: bolder;
 }
 
-.project {
+.project-row {
   list-style: decimal;
   font-family: 'Courier New', Courier, monospace;
   font-size: larger;
   cursor: pointer;
   margin: 15px;
   font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.delete-proj-icon {
+  display: none;
+}
+
+.project-row:hover .delete-proj-icon {
+  display: contents;
 }
 
 #new-project-form {

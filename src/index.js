@@ -13,6 +13,7 @@ const controller = () => {
   UIController().getProjectTodos();
   UIController().deleteTodo();
   UIController().editTodos();
+  // UIController().deleteProject();
 };
 
 controller();

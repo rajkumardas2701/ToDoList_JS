@@ -1,4 +1,7 @@
-const todosArr = [];
+// const todosArr = [];
+const todosArr = JSON.parse(localStorage.getItem('todosArr'))
+  ? JSON.parse(localStorage.getItem('todosArr')) : [];
+
 const todoList = () => {
   // const createToDo = (todo) => {
   //   const settodo = {
@@ -13,12 +16,17 @@ const todoList = () => {
   //   todos.push(settodo);
   // };
 
+  const updateTodosInLocalStorage = () => {
+    localStorage.setItem('todosArr', JSON.stringify(todosArr));
+  };
+
   const deleteTodoItem = (todoToDel) => {
     for (let i = 0; i < todosArr.length; i += 1) {
       if (todosArr[i].title === todoToDel) {
         todosArr.splice(i, 1);
       }
     }
+    updateTodosInLocalStorage();
   };
 
   // const editToDo = (todo, posi) => {
@@ -31,6 +39,7 @@ const todoList = () => {
   // };
   return {
     deleteTodoItem,
+    updateTodosInLocalStorage,
   };
 };
 
